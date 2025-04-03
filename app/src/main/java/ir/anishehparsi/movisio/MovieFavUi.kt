@@ -34,6 +34,7 @@ fun MovieFavUi(modifier: Modifier = Modifier) {
     LaunchedEffect(key1 = Unit) {
         movieFavList = Hawk.get("movieFavList", emptyList())
     }
+
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
@@ -65,6 +66,7 @@ fun SaveMovieList(
             .fillMaxSize()
             .padding(horizontal = 8.dp)
     ) {
+
         Row(
             modifier = Modifier
                 .padding(24.dp)
@@ -72,7 +74,7 @@ fun SaveMovieList(
             Text(
                 text = item.title,
             )
-            Spacer(modifier=Modifier.weight(1f))
+            Spacer(modifier = Modifier.weight(1f))
             Image(
                 modifier = Modifier
                     .clickable {
@@ -85,5 +87,6 @@ fun SaveMovieList(
         }
 
     }
-    Spacer(modifier=Modifier.height(4.dp))
+
+    Spacer(modifier = Modifier.height(4.dp))
 }

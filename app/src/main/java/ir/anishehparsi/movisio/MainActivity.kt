@@ -37,12 +37,10 @@ import ir.anishehparsi.movisio.destinations.MovieFavUiDestination
 import ir.anishehparsi.movisio.destinations.MovieHomeUiDestination
 import ir.anishehparsi.movisio.destinations.UserUiDestination
 
-
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         enableEdgeToEdge()
         setContent {
@@ -54,7 +52,7 @@ class MainActivity : ComponentActivity() {
                     MovieHomeUiDestination.route -> "Home"
                     MovieFavUiDestination.route -> "Favorite"
                     UserUiDestination.route -> "User Attention"
-                    MovieDetailUiDestination.route->"Detail"
+                    MovieDetailUiDestination.route -> "Detail"
                     AccountUiDestination.route -> ""
                     else -> "Movisio"
                 }
@@ -66,10 +64,10 @@ class MainActivity : ComponentActivity() {
                 BackHandler {
 
                     when (currentRoute) {
-                        MovieHomeUiDestination.route -> showExitDialog=true
-                        MovieFavUiDestination.route -> showExitDialog=true
-                        UserUiDestination.route -> showExitDialog=true
-                        AccountUiDestination.route -> showExitDialog=true
+                        MovieHomeUiDestination.route -> showExitDialog = true
+                        MovieFavUiDestination.route -> showExitDialog = true
+                        UserUiDestination.route -> showExitDialog = true
+                        AccountUiDestination.route -> showExitDialog = true
                     }
                 }
 
@@ -90,14 +88,14 @@ class MainActivity : ComponentActivity() {
                                 icon = {
                                     Icon(imageVector = Icons.Default.Home, contentDescription = "")
                                 },
-                                label = { Text(text = "Home") })
+                                label = { Text(text = "Home Page") })
                             NavigationBarItem(
                                 selected = currentRoute == MovieFavUiDestination.route,
                                 onClick = { navController.navigate(MovieFavUiDestination.route) },
                                 icon = {
                                     Icon(imageVector = Icons.Default.Star, contentDescription = "")
                                 },
-                                label = { Text(text = "Favorite") }
+                                label = { Text(text = "Favorite Page") }
                             )
                             NavigationBarItem(
                                 selected = currentRoute == UserUiDestination.route,
@@ -105,7 +103,7 @@ class MainActivity : ComponentActivity() {
                                 icon = {
                                     Icon(
                                         imageVector = Icons.Default.AccountCircle,
-                                        contentDescription = ""
+                                        contentDescription = "User Page"
                                     )
                                 },
                                 label = { Text(text = "User") }

@@ -1,6 +1,5 @@
 package ir.anishehparsi.movisio.Service
 
-
 import android.util.Log
 
 import com.google.gson.Gson
@@ -12,7 +11,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
-
 
 suspend fun getMovieData(): List<Result>? {
     return withContext(Dispatchers.IO) {
@@ -66,7 +64,7 @@ suspend fun getMovieImage(): Images? {
 
         val parsedData: ConfigResponse? = Gson().fromJson(json, ConfigResponse::class.java)
         Log.d("ParsedData", "Parsed data: $parsedData")
-        // بررسی اینکه parsedData null نباشه و images هم موجود باشه
+
         return@withContext parsedData?.images
 
     }

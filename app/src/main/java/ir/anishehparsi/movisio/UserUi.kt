@@ -1,15 +1,12 @@
 package ir.anishehparsi.movisio
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -22,12 +19,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.orhanobut.hawk.Hawk
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import ir.anishehparsi.movisio.destinations.AccountUiDestination
-import ir.anishehparsi.movisio.destinations.UserUiDestination
 
 @Destination
 @Composable
@@ -40,7 +35,7 @@ fun UserUi(modifier: Modifier = Modifier, navigator: DestinationsNavigator) {
             Text(
                 modifier = Modifier
                     .padding(top = 32.dp, start = 8.dp, end = 8.dp),
-                text = "Please enter your data in Account Page",
+                text = stringResource(R.string.account_enter_data),
                 fontWeight = FontWeight.Bold,
                 fontSize = 32.sp,
                 color = Color.Red,
@@ -86,7 +81,10 @@ fun UserUi(modifier: Modifier = Modifier, navigator: DestinationsNavigator) {
                 navigator.navigate(AccountUiDestination)
             },
             icon = {
-                Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "")
+                Icon(
+                    imageVector = Icons.Default.AccountCircle,
+                    contentDescription = "Register account button"
+                )
             },
             text = { Text(text = "Account") },
         )

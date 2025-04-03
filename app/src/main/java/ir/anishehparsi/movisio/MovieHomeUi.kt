@@ -17,7 +17,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -101,7 +100,13 @@ fun MovieHomeUi(modifier: Modifier = Modifier, navigator: DestinationsNavigator)
                 verticalArrangement = Arrangement.Top
             ) {
                 items(filteredMovies) { movie ->
-                    movieImageState?.let { MovieItemUi(item = movie, images = it, navigator = navigator) }
+                    movieImageState?.let {
+                        MovieItemUi(
+                            item = movie,
+                            images = it,
+                            navigator = navigator
+                        )
+                    }
                 }
             }
         }
@@ -109,8 +114,21 @@ fun MovieHomeUi(modifier: Modifier = Modifier, navigator: DestinationsNavigator)
 }
 
 @Composable
-fun MovieItemUi(modifier: Modifier = Modifier, item: Result, images: Images, navigator: DestinationsNavigator) {
-    Card(modifier = Modifier.clickable { navigator.navigate(MovieDetailUiDestination(item, images)) }) {
+fun MovieItemUi(
+    modifier: Modifier = Modifier,
+    item: Result,
+    images: Images,
+    navigator: DestinationsNavigator,
+) {
+
+    Card(modifier = Modifier.clickable {
+        navigator.navigate(
+            MovieDetailUiDestination(
+                item,
+                images
+            )
+        )
+    }) {
         Row(
             modifier = Modifier
                 .fillMaxSize()
@@ -134,7 +152,7 @@ fun MovieItemUi(modifier: Modifier = Modifier, item: Result, images: Images, nav
                 Row {
                     Image(
                         painter = painterResource(R.drawable.star),
-                        contentDescription = "Star icon representing movie rating"
+                        contentDescription = "Star icon movie rating"
                     )
                     Spacer(Modifier.width(4.dp))
                     Text(text = item.vote_average.toString())
@@ -142,5 +160,6 @@ fun MovieItemUi(modifier: Modifier = Modifier, item: Result, images: Images, nav
             }
         }
     }
+
     Spacer(modifier = Modifier.height(6.dp))
 }

@@ -13,11 +13,11 @@ data class Images(
     val poster_sizes: List<String>,
     val profile_sizes: List<String>,
     val secure_base_url: String,
-    val still_sizes: List<String>
+    val still_sizes: List<String>,
 ) : Parcelable
 
 @Parcelize
 @Serializable
 data class ConfigResponse(
-    val images: Images?
+    val images: Images?,
 ) : Parcelable

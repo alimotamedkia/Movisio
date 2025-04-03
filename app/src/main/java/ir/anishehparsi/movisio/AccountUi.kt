@@ -36,13 +36,14 @@ import ir.anishehparsi.movisio.destinations.UserUiDestination
 @Composable
 fun AccountUi(modifier: Modifier = Modifier, navigator: DestinationsNavigator) {
     val context = LocalContext.current
-    var accountName by rememberSaveable  { mutableStateOf("") }
-    var accountAge by rememberSaveable  { mutableStateOf("") }
+    var accountName by rememberSaveable { mutableStateOf("") }
+    var accountAge by rememberSaveable { mutableStateOf("") }
     var isNameError by remember { mutableStateOf(false) }
     var isAgeError by remember { mutableStateOf(false) }
 
     Hawk.put("name", accountName)
     Hawk.put("age", accountAge)
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -117,10 +118,11 @@ fun AccountUi(modifier: Modifier = Modifier, navigator: DestinationsNavigator) {
                     )
                     Toast.makeText(context, "Your data is saved 😊", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(context, "Please fill all fields!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Please fill all fields! ❗", Toast.LENGTH_SHORT).show()
                 }
             }
         ) {
+
             Text(text = "Save 💾")
         }
     }

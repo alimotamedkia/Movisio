@@ -86,16 +86,18 @@ class MainActivity : ComponentActivity() {
                                 selected = currentRoute == MovieHomeUiDestination.route,
                                 onClick = { navController.navigate(MovieHomeUiDestination.route) },
                                 icon = {
-                                    Icon(imageVector = Icons.Default.Home, contentDescription = "")
+                                    Icon(imageVector = Icons.Default.Home,
+                                        contentDescription = "Home Page")
                                 },
-                                label = { Text(text = "Home Page") })
+                                label = { Text(text = "Home") })
                             NavigationBarItem(
                                 selected = currentRoute == MovieFavUiDestination.route,
                                 onClick = { navController.navigate(MovieFavUiDestination.route) },
                                 icon = {
-                                    Icon(imageVector = Icons.Default.Star, contentDescription = "")
+                                    Icon(imageVector = Icons.Default.Star,
+                                        contentDescription = "Favorite Page")
                                 },
-                                label = { Text(text = "Favorite Page") }
+                                label = { Text(text = "Favorite") }
                             )
                             NavigationBarItem(
                                 selected = currentRoute == UserUiDestination.route,

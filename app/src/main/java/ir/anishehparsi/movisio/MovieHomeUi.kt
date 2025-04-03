@@ -1,5 +1,6 @@
 package ir.anishehparsi.movisio
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -73,7 +74,7 @@ fun MovieHomeUi(modifier: Modifier = Modifier, navigator: DestinationsNavigator)
             Image(
                 modifier = Modifier.size(128.dp),
                 painter = painterResource(R.drawable.signal_wifi_connected_no_internet),
-                contentDescription = ""
+                contentDescription = "Internet not connected picture"
             )
             Text(text = "Internet not connected")
         }
@@ -100,10 +101,24 @@ fun MovieHomeUi(modifier: Modifier = Modifier, navigator: DestinationsNavigator)
                 verticalArrangement = Arrangement.Top
             ) {
                 items(filteredMovies) { movie ->
-                    movieImageState?.let {
+                    movieImageState?.let { images ->
                         MovieItemUi(
                             item = movie,
-                            images = it,
+                            images = images,
+                            navigator = navigator
+                        )
+                    } ?: run {
+                        MovieItemUi(
+                            item = movie,
+                            images = Images(
+                                backdrop_sizes = emptyList(),
+                                base_url = "",
+                                logo_sizes = emptyList(),
+                                poster_sizes = listOf("w500"),  // مقدار پیش‌فرض
+                                profile_sizes = emptyList(),
+                                secure_base_url = "",
+                                still_sizes = emptyList()
+                            ),
                             navigator = navigator
                         )
                     }
@@ -115,11 +130,13 @@ fun MovieHomeUi(modifier: Modifier = Modifier, navigator: DestinationsNavigator)
 
 @Composable
 fun MovieItemUi(
-    modifier: Modifier = Modifier,
     item: Result,
     images: Images,
     navigator: DestinationsNavigator,
 ) {
+    val posterSize = images.poster_sizes.getOrNull(0) ?: "w500"
+    val imageUrl = "${images.secure_base_url}$posterSize${item.poster_path}"
+    Log.d("image test", imageUrl)
 
     Card(modifier = Modifier.clickable {
         navigator.navigate(
@@ -137,7 +154,7 @@ fun MovieItemUi(
             AsyncImage(
                 modifier = Modifier
                     .size(128.dp, 96.dp),
-                model = images.secure_base_url + images.poster_sizes[0] + item.poster_path,
+                model = imageUrl,
                 contentDescription = "Poster of the movie ${item.title}",
                 placeholder = painterResource(R.drawable.movisio_nbg),
                 error = painterResource(R.drawable.movisio_nbg)

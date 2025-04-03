@@ -16,8 +16,3 @@ data class Images(
     val still_sizes: List<String>,
 ) : Parcelable
 
-@Parcelize
-@Serializable
-data class ConfigResponse(
-    val images: Images?,
-) : Parcelable

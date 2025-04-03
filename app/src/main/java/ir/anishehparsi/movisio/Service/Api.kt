@@ -4,8 +4,8 @@ import android.util.Log
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import ir.anishehparsi.movisio.Model.ConfigResponse
 import ir.anishehparsi.movisio.Model.Images
+import ir.anishehparsi.movisio.Model.MovieImage
 import ir.anishehparsi.movisio.Model.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -18,7 +18,7 @@ suspend fun getMovieData(): List<Result>? {
         val client = OkHttpClient()
 
         val request = Request.Builder()
-            .url("https://api.themoviedb.org/3/movie/upcoming?")
+            .url("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&sort_by=popularity.desc")
             .get()
             .addHeader("accept", "application/json")
             .addHeader(
@@ -43,6 +43,7 @@ suspend fun getMovieData(): List<Result>? {
 }
 
 
+
 suspend fun getMovieImage(): Images? {
     return withContext(Dispatchers.IO) {
         val client = OkHttpClient()
@@ -62,7 +63,7 @@ suspend fun getMovieImage(): Images? {
 
         Log.d("API Image Response", json ?: "Response is null")
 
-        val parsedData: ConfigResponse? = Gson().fromJson(json, ConfigResponse::class.java)
+        val parsedData: MovieImage? = Gson().fromJson(json, MovieImage::class.java)
         Log.d("ParsedData", "Parsed data: $parsedData")
 
         return@withContext parsedData?.images

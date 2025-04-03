@@ -86,7 +86,8 @@ fun MovieHomeUi(modifier: Modifier = Modifier, navigator: DestinationsNavigator)
                 onValueChange = { searchText = it },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(horizontal = 16.dp)
+                    .padding(bottom = 8.dp)
             )
 
             val filteredMovies = movieListState?.filter {

@@ -13,6 +13,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -37,6 +42,7 @@ fun MovieDetailUi(
     images: Images
 ) {
 val context = LocalContext.current
+    var isFave by rememberSaveable { mutableStateOf(isMovieFavorite(item)) }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -75,16 +81,29 @@ val context = LocalContext.current
                     .clickable {
                         val dbList: List<Result>? = Hawk.get("movieFavList", emptyList())
                         val finalList = dbList?.toMutableList()
-                        finalList?.add(item)
+
+                        if (isFave) {
+                            finalList?.remove(item)
+                            Toast.makeText(context, "Movie removed ❌", Toast.LENGTH_SHORT).show()
+                        } else {
+                            finalList?.add(item)
+                            Toast.makeText(context, "Movie saved 👍", Toast.LENGTH_SHORT).show()
+                        }
+
                         Hawk.put("movieFavList", finalList)
-                        Toast.makeText(context, "Movie saved 👍", Toast.LENGTH_SHORT).show()
+                        isFave = !isFave
                     },
-                painter = painterResource(R.drawable.favorite),
-                contentDescription = ""
+                painter = painterResource(if (isFave) R.drawable.favorite else R.drawable.favorite_border),
+                contentDescription = "Favorite Icon"
             )
         }
         Spacer(modifier.height(32.dp))
         Text(text = item.overview)
         Spacer(modifier.weight(1f))
     }
+}
+
+fun isMovieFavorite(item: Result): Boolean {
+    val dbList: List<Result> = Hawk.get("movieFavList", emptyList())
+    return dbList.contains(item)
 }

@@ -29,7 +29,7 @@ import ir.anishehparsi.movisio.Model.Result
 @Destination
 @Composable
 fun MovieFavUi(modifier: Modifier = Modifier) {
-    var movieFavList by remember { mutableStateOf<List<Result>?>(null) }
+    var movieFavList by remember { mutableStateOf(Hawk.get("movieFavList", emptyList<Result>())) }
 
     LaunchedEffect(key1 = Unit) {
         movieFavList = Hawk.get("movieFavList", emptyList())
@@ -39,14 +39,14 @@ fun MovieFavUi(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .padding(4.dp)
     ) {
-        items(movieFavList ?: emptyList()) {
-            SaveMovieList(item = it,
+        items(movieFavList ?: emptyList()) { item ->
+            SaveMovieList(
+                item = item,
                 onDeletedCLicked = {
-                    val updatedList: List<Result>? = Hawk.get("movieFavList", emptyList())
-                    val finalList = updatedList?.toMutableList()
-                    finalList?.remove(it)
-                    Hawk.put("movieFavList", finalList)
-                    movieFavList = Hawk.get("movieFavList", emptyList())
+                    val updatedList = movieFavList.toMutableList()
+                    updatedList.remove(item)
+                    Hawk.put("movieFavList", updatedList)
+                    movieFavList = updatedList
                 })
 
         }
@@ -55,11 +55,11 @@ fun MovieFavUi(modifier: Modifier = Modifier) {
 
 @Composable
 fun SaveMovieList(
-    modifier: Modifier = Modifier,
     item: Result,
     onDeletedCLicked: () -> Unit,
 ) {
     val context = LocalContext.current
+
     OutlinedCard(
         modifier = Modifier
             .fillMaxSize()
@@ -72,18 +72,18 @@ fun SaveMovieList(
             Text(
                 text = item.title,
             )
-            Spacer(modifier.weight(1f))
+            Spacer(modifier=Modifier.weight(1f))
             Image(
                 modifier = Modifier
                     .clickable {
                         onDeletedCLicked()
                         Toast.makeText(context, "Favorite Canceled ❌", Toast.LENGTH_SHORT).show()
                     },
-                painter = painterResource(R.drawable.favorite_border),
-                contentDescription = ""
+                painter = painterResource(R.drawable.favorite),
+                contentDescription = "Remove from favorites"
             )
         }
 
     }
-    Spacer(modifier.height(4.dp))
+    Spacer(modifier=Modifier.height(4.dp))
 }

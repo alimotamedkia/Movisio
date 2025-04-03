@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Movisio</string>
+    <string name="account_title">Account</string>
+    <string name="under13">Based on your age, PG-13 movies may contain some scenes that are not suitable for you.ℹ️ \n Additionally, you must watch R-rated movies with a parent ❗ \n and avoid watching NC-17 movies.⛔</string>
+    <string name="under17">Based on your age, you must watch R-rated movies with a parent ❗ \n and avoid watching NC-17 movies.⛔</string>
+    <string name="age_popular">Your movie rating category is G, which means you can watch all types of movies.</string>
+</resources>

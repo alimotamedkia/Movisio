@@ -32,6 +32,7 @@ import com.orhanobut.hawk.Hawk
 import com.ramcosta.composedestinations.DestinationsNavHost
 import ir.anishehparsi.movisio.Logic.ExitDialog
 import ir.anishehparsi.movisio.destinations.AccountUiDestination
+import ir.anishehparsi.movisio.destinations.MovieDetailUiDestination
 import ir.anishehparsi.movisio.destinations.MovieFavUiDestination
 import ir.anishehparsi.movisio.destinations.MovieHomeUiDestination
 import ir.anishehparsi.movisio.destinations.UserUiDestination
@@ -53,6 +54,7 @@ class MainActivity : ComponentActivity() {
                     MovieHomeUiDestination.route -> "Home"
                     MovieFavUiDestination.route -> "Favorite"
                     UserUiDestination.route -> "User Attention"
+                    MovieDetailUiDestination.route->"Detail"
                     AccountUiDestination.route -> ""
                     else -> "Movisio"
                 }

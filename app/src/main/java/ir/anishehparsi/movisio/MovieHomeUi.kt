@@ -39,6 +39,7 @@ import ir.anishehparsi.movisio.Model.Images
 import ir.anishehparsi.movisio.Model.Result
 import ir.anishehparsi.movisio.Service.getMovieData
 import ir.anishehparsi.movisio.Service.getMovieImage
+import ir.anishehparsi.movisio.destinations.MovieDetailUiDestination
 
 @Destination(start = true)
 @Composable
@@ -98,7 +99,7 @@ var context = LocalContext.current
 
             items(movies) { movie ->
                 if (images != null) {
-                    MovieItemUi(item = movie, images = images)
+                    MovieItemUi(item = movie, images = images, navigator = navigator)
                 }
             }
         }
@@ -107,11 +108,12 @@ var context = LocalContext.current
 
 
 @Composable
-fun MovieItemUi(modifier: Modifier = Modifier, item: Result, images: Images) {
+fun MovieItemUi(modifier: Modifier = Modifier, item: Result, images: Images,navigator: DestinationsNavigator) {
 
 
 
-    Card (modifier = Modifier.clickable {  }){
+    Card (modifier = Modifier.clickable { navigator.navigate(MovieDetailUiDestination(item, images)) }) {
+
         Row(
             modifier = Modifier
                 .fillMaxSize()

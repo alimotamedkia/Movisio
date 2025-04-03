@@ -1,8 +1,10 @@
 package ir.anishehparsi.movisio.Model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
-
+@Parcelize
 @Serializable
 data class Images(
     val backdrop_sizes: List<String>,
@@ -12,8 +14,10 @@ data class Images(
     val profile_sizes: List<String>,
     val secure_base_url: String,
     val still_sizes: List<String>
-)
+) : Parcelable
+
+@Parcelize
 @Serializable
 data class ConfigResponse(
-    val images: Images? // تغییر این به Images? تا امکان null بودن را داشته باشه
-)
+    val images: Images?
+) : Parcelable
